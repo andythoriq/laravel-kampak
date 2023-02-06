@@ -19,7 +19,7 @@ class GuruController extends Controller
      */
     public function create()
     {
-        //
+        return view('guru.create');
     }
 
     /**
@@ -30,7 +30,9 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $teacher = $request->validate([
+            
+        ]);
     }
 
     /**

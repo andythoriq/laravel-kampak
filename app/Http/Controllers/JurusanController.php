@@ -14,7 +14,7 @@ class JurusanController extends Controller
      */
     public function index()
     {
-        //
+        return view('jurusan.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class JurusanController extends Controller
      */
     public function create()
     {
-        //
+        return view('jurusan.create');
     }
 
     /**

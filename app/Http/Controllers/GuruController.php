@@ -31,13 +31,15 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
-        $teacher = $request->validate([
+        $newTeacher = $request->validate([
             'nip' => ['required', 'unique:tb_guru', 'numeric', 'digits_between:1,18'],
             'nama' => ['required', 'regex:/^[\pL\s\-]+$/u', 'max:191'],
             'jk' => ['required', 'in:L,P'],
             'alamat' => ['required'],
             'password' => ['required']
         ]);
+        Guru::create($newTeacher);
+        return redirect(route('home'))->with('success', 'Data Guru Berhasil di Tambah');
     }
 
     /**
@@ -48,7 +50,7 @@ class GuruController extends Controller
      */
     public function show(Guru $guru)
     {
-        //
+        return "wlee";
     }
 
     /**
@@ -59,7 +61,7 @@ class GuruController extends Controller
      */
     public function edit(Guru $guru)
     {
-        //
+        return view('guru.edit', compact('guru'));
     }
 
     /**

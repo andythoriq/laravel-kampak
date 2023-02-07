@@ -2,7 +2,7 @@
 @section('title', 'Data Guru')
 @section('content')
 <x-input>
-    <x-slot:title>Tambah Data Guru</x-slot>
+    <x-slot:title>Edit Data {{ $guru->nama }}</x-slot>
     <x-slot:form>
         <form action="{{ route('guru.store') }}" method="post">
             @csrf

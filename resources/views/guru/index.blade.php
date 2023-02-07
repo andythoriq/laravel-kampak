@@ -1,10 +1,11 @@
 @extends('layouts.main')
-@section('content', ['title' => 'Data Guru'])
+@section('title', 'Data Guru')
+@section('content')
 <x-tabel>
     <x-slot:title>Data Guru</x-slot>
-    </x-slot:link>{{ route('guru.create') }}</x-slot>
+    <x-slot:link>{{ route('guru.create') }}</x-slot>
     <x-slot:table>
-        <table cellpadding="10" cellspacing="0">
+        <table cellpadding="10" cellspacing="0" border="1">
             <thead>
                 <tr>
                     <th>No</th>
@@ -22,7 +23,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $teacher->nip }}</td>
                     <td>{{ $teacher->nama }}</td>
-                    <td>{{ $teacher->jk && 'L'  'Laki-Laki' :  'Perempuan'}}</td>
+                    <td>{{ $teacher->jk == 'L' ? 'Laki-Laki' : 'Perempuan'}}</td>
                     <td>{{ $teacher->alamat }}</td>
                     <td>{{ $teacher->password }}</td>
                     <td><a href="{{ route('guru.edit', $teacher->id) }}" type="button">Edit</a></td>

@@ -13,22 +13,13 @@ class GuruController extends Controller
         return view('guru.index', compact('teachers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         return view('guru.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         $newTeacher = $request->validate([
@@ -39,51 +30,41 @@ class GuruController extends Controller
             'password' => ['required']
         ]);
         Guru::create($newTeacher);
-        return redirect(route('home'))->with('success', 'Data Guru Berhasil di Tambah');
+        return redirect(route('guru.index'))->with('success', 'Data Guru Berhasil di Tambah');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Guru  $guru
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Guru $guru)
     {
-        return "wlee";
+        return dd($guru);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Guru  $guru
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Guru $guru)
     {
         return view('guru.edit', compact('guru'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Guru  $guru
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Guru $guru)
     {
-        //
+        $updatedTeacher = $request->validate([
+            'nama' => ['required', 'regex:/^[\pL\s\-]+$/u', 'max:191'],
+            'jk' => ['required', 'in:L,P'],
+            'alamat' => ['required'],
+            'password' => ['required']
+        ]);
+        $updatedTeacher['nip'] = $guru->nip;
+        $guru->update($updatedTeacher);
+        return redirect(route('guru.index'))->with('success', 'DataGuru Berhasil di Ubah');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Guru  $guru
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Guru $guru)
     {
-        //
+        $namaGuru = $guru->nama;
+        $idGuru = $guru->id;
+        $guru->delete();
+        return back()->with('warning', "Data Guru dengan ID, $idGuru dan dengan Nama, $namaGuru Berhasil di Hapus");
     }
 }

@@ -9,41 +9,53 @@
             <table width="50%">
                 <tr>
                     <td width="25%">NIP</td>
-                    <td width="25%"><input type="text" name="nip" value="{{ old('nip') }}"></td>
-                    @error('nip')
-                        <td><span style="color: red">{{ $message }}</span></td>
-                    @enderror
+                    <td width="25%">
+                        <input type="text" name="nip" value="{{ old('nip') }}">
+                        @error('nip')
+                            <br><span style="color: red">{{ $message }}</span>
+                        @enderror
+                    </td>
+                    
                 </tr>
                 <tr>
                     <td width="25%">NAMA GURU</td>
-                    <td width="25%"><input type="text" name="nama" value="{{ old('nama') }}"></td>
-                    @error('nama')
-                        <td><span style="color: red">{{ $message }}</span></td>
-                    @enderror
+                    <td width="25%">
+                        <input type="text" name="nama" value="{{ old('nama') }}">
+                        @error('nama')
+                            <br><span style="color: red">{{ $message }}</span>
+                        @enderror
+                    </td>
                 </tr>
                 <tr>
                     <td width="25%">JENIS KELAMIN</td>
                     <td width="25%">
-                        <input type="radio" name="jk" value="{{ old('jk', 'L') }}">Laki-Laki
-                        <input type="radio" name="jk" value="{{ old('jk', 'P') }}">Perempuan
+                        <select name="jk">
+                            <option value="">-- pilih jenis kelamin --</option>
+                            <option value="L" @selected(old('jk') == 'L')>Laki-Laki</option>
+                            <option value="P" @selected(old('jk') == 'P')>Perempuan</option>
+                        </select>
+                        @error('jk')
+                            <br><span style="color: red">{{ $message }}</span>
+                        @enderror
                     </td>
-                    @error('jk')
-                        <td><span style="color: red">{{ $message }}</span></td>
-                    @enderror
                 </tr>
                 <tr>
                     <td width="25%">ALAMAT</td>
-                    <td width="25%"><textarea name="alamat" cols="30" rows="10">{{ old('alamat') }}</textarea></td>
-                    @error('alamat')
-                        <td><span style="color: red">{{ $message }}</span></td>
-                    @enderror
+                    <td width="25%">
+                        <textarea name="alamat" cols="30" rows="10">{{ old('alamat') }}</textarea>
+                        @error('alamat')
+                            <br><span style="color: red">{{ $message }}</span>
+                        @enderror
+                    </td>
                 </tr>
                 <tr>
                     <td width="25%">PASSWORD</td>
-                    <td width="25%"><input type="password" name="password"></td>
-                    @error('password')
-                        <td><span style="color: red">{{ $message }}</span></td>
-                    @enderror
+                    <td width="25%">
+                        <input type="password" name="password">
+                        @error('password')
+                            <br><span style="color: red">{{ $message }}</span>
+                        @enderror
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2">

@@ -8,7 +8,7 @@
         <table cellpadding="10" cellspacing="0" border="1">
             <thead>
                 <tr>
-                    <th>No</th>
+                    <th>NO</th>
                     <th>NIP</th>
                     <th>NAMA GURU</th>
                     <th>JK</th>

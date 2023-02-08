@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Data Guru')
+@section('title', 'Guru')
 @section('content')
 <x-input>
     <x-slot:title>Edit Data {{ $guru->nama }}</x-slot>

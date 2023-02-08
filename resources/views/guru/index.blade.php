@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Data Guru')
+@section('title', 'Guru')
 @section('content')
 <x-tabel>
     <x-slot:title>Data Guru</x-slot>
@@ -28,7 +28,7 @@
                     <td>{{ $teacher->password }}</td>
                     <td><a href="{{ route('guru.edit', $teacher->id) }}" type="button">Edit</a></td>
                     <td><form action="{{ route('guru.destroy', $teacher->id) }}" method="post"> @csrf @method('delete')
-                        <button type="submit">Hapus</button>
+                        <button type="submit" onclick="return confirm('Menghapus data akan menghapus foreign key nya pada table yang memilikinya')">Hapus</button>
                     </td></form>
                 </tr>
             @endforeach

@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Penailaian.edu | @yield('title')</title>
+    <title>Kampak Laravel | @yield('title')</title>
 </head>
 <body>
     <x-nav></x-nav>
+    <x-alert></x-alert>
     @yield('content')
     <x-foot></x-foot>
 </body>

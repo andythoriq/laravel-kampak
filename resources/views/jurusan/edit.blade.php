@@ -2,7 +2,7 @@
 @section('title', 'Jurusan')
 @section('content')
 <x-input>
-    <x-slot:title>Tambah Data Jurusan</x-slot>
+    <x-slot:title>Edit Data {{ $jurusan->nama }}</x-slot>
     <x-slot:form>
         
     </x-slot>

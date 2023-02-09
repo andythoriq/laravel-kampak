@@ -1,31 +1,35 @@
 @extends('layouts.main')
 @section('title', 'Jurusan')
 @section('content')
-<x-tabel>
-    <x-slot:title>Data Jurusan</x-slot>
-    <x-slot:link>{{ route('jurusan.create') }}</x-slot>
-    <x-slot:table>
-        <table cellpadding="10" cellspacing="0" border="1">
-            <thead>
-                <tr>
-                    <th>NO</th>
-                    <th>JURUSAN</th>
-                    <th colspan="2">ACTION</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($majors as $major)
+@if ($majors->count() <= 0 || null)
+    <div class="alert">Data jurusan tidak ditemukan!</div>
+@else
+    <x-tabel>
+        <x-slot:title>Data Jurusan</x-slot>
+        <x-slot:link>{{ route('jurusan.create') }}</x-slot>
+        <x-slot:table>
+            <table cellpadding="10" cellspacing="0" border="1">
+                <thead>
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $major->nama }}</td>
-                        <td><a href="{{ route('jurusan.edit', $major->id) }}" type="button">Edit</a></td>
-                        <td><form action="{{ route('jurusan.destroy', $major->id) }}" method="post">@csrf @method('delete')
-                            <button type="submit" onclick="return confirm('Menghapus data akan menghapus foreign key nya pada table yang memilikinya')">Hapus</button>
-                        </form></td>
+                        <th>NO</th>
+                        <th>JURUSAN</th>
+                        <th colspan="2">ACTION</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </x-slot>
-</x-tabel>
+                </thead>
+                <tbody>
+                    @foreach ($majors as $major)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $major->nama }}</td>
+                            <td><a href="{{ route('jurusan.edit', $major->id) }}" type="button">Edit</a></td>
+                            <td><form action="{{ route('jurusan.destroy', $major->id) }}" method="post">@csrf @method('delete')
+                                <button type="submit" onclick="return confirm('Menghapus data akan menghapus foreign key nya pada table yang memilikinya')">Hapus</button>
+                            </form></td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </x-slot>
+    </x-tabel>
+@endif
 @endsection

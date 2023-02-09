@@ -15,6 +15,12 @@ class JurusanController extends Controller
     public function index()
     {
         $majors = Jurusan::all();
+        if($majors->count() <= 0){
+            session()->flash('message', [
+                'type' => 'warning',
+                'text' => 'Table jurusan masih kosong'
+              ]);
+        }
         return view('jurusan.index', compact('majors'));
     }
 
@@ -36,7 +42,11 @@ class JurusanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newMajor = $request->validate([
+            'nama' => ['required', 'unique:tb_jurusan', 'regex:/^[A-Z][A-Za-z]+\s[A-Z][A-Za-z]+$/', 'max:191']
+        ]);
+        Jurusan::create($newMajor);
+        return redirect(route('jurusan.index'))->with('success', 'Data jurusan berhasil ditambah');
     }
 
     /**
@@ -47,7 +57,7 @@ class JurusanController extends Controller
      */
     public function show(Jurusan $jurusan)
     {
-        //
+        return "wlee";
     }
 
     /**
@@ -58,7 +68,7 @@ class JurusanController extends Controller
      */
     public function edit(Jurusan $jurusan)
     {
-        //
+        return view('jurusan.edit', compact('jurusan'));
     }
 
     /**
@@ -70,7 +80,17 @@ class JurusanController extends Controller
      */
     public function update(Request $request, Jurusan $jurusan)
     {
-        //
+        function cekPerubahanNama($request, $jurusan){
+            if ($request->nama == $jurusan->nama) {
+                return '';
+            }
+            return 'unique:tb_jurusan';
+        }
+        $updatedMajor = $request->validate([
+            'nama' => ['required', cekPerubahanNama($request, $jurusan), 'regex:/^[A-Z][A-Za-z]+\s[A-Z][A-Za-z]+$/', 'max:191']
+        ]);
+        $jurusan->update($updatedMajor);
+        return redirect(route('jurusan.index'))->with('warning', 'Data jurusan berhasil diubah');
     }
 
     /**
@@ -81,6 +101,9 @@ class JurusanController extends Controller
      */
     public function destroy(Jurusan $jurusan)
     {
-        //
+        $namaJurusan = $jurusan->nama;
+        $idJurusan = $jurusan->id;
+        $jurusan->delete();
+        return back()->with('danger', "Data jurusan dengan ID, $idJurusan dan dengan nama, $namaJurusan berhasil dihapus");
     }
 }

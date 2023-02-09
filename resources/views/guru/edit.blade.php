@@ -11,7 +11,7 @@
                     <td width="25%">NIP</td>
                     <td width="25%"><input type="text" name="nip" value="{{ old('nip', $guru->nip) }}" @disabled(true)>
                         @error('nip')
-                            <span style="color: red">{{ $message }}</span>
+                            <br><span style="color: red">{{ $message }}</span>
                         @enderror
                     </td>
                 </tr>
@@ -20,7 +20,7 @@
                     <td width="25%">
                         <input type="text" name="nama" value="{{ old('nama', $guru->nama) }}">
                         @error('nama')
-                            <span style="color: red">{{ $message }}</span>
+                            <br><span style="color: red">{{ $message }}</span>
                         @enderror
                     </td>
                 </tr>
@@ -33,7 +33,7 @@
                             <option value="P" @selected(old('jk', $guru->jk) == 'P')>Perempuan</option>
                         </select>
                         @error('jk')
-                            <span style="color: red">{{ $message }}</span>
+                            <br><span style="color: red">{{ $message }}</span>
                         @enderror
                     </td>
                 </tr>
@@ -42,7 +42,7 @@
                     <td width="25%">
                         <textarea name="alamat" cols="30" rows="10">{{ old('alamat', $guru->alamat) }}</textarea>
                         @error('alamat')
-                            <span style="color: red">{{ $message }}</span>
+                            <br><span style="color: red">{{ $message }}</span>
                         @enderror
                     </td>
                 </tr>
@@ -51,7 +51,7 @@
                     <td width="25%">
                         <input type="password" name="password" value="{{ $guru->password }}">
                         @error('password')
-                            <span style="color: red">{{ $message }}</span>
+                            <br><span style="color: red">{{ $message }}</span>
                         @enderror
                     </td>
                 </tr>

@@ -3,7 +3,7 @@
 <head>
   <style>
     body {
-        background-color: #FF3CAC;
+        background-color: #A9C9FF;
         background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
         font-family:Verdana, Tahoma, sans-serif
     }

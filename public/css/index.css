@@ -1,32 +1,55 @@
+/* Body */
+body {
+    background-color: #00425a;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+}
+body a {
+    color: white;
+}
 /* Alert */
 .alert {
     padding: 20px;
-    background-color: #f44336;
-    color: white;
     border-radius: 5px;
+    margin-bottom: 20px;
     text-align: center;
-    margin: 20px auto;
-    max-width: 50%;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.alert-success {
+    background-color: green;
+    color: white;
+}
+
+.alert-danger {
+    background-color: red;
+    color: white;
+}
+.alert-warning {
+    background-color: #ff9800;
+    color: #fff;
 }
 
 /* Table */
-table {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-gap: 10px;
-    margin: auto;
+table.TableMantap {
+    width: 100%;
+    background-color: #999999;
     border-collapse: collapse;
+    border-width: 3px;
+    border-color: #66ff33;
+    border-style: outset;
+    color: #ffffff;
     width: 80%;
-    text-align: center;
-    font-size: 16px;
+    margin: auto;
 }
-
-th,
-td {
-    border: 1px solid black;
-    padding: 10px;
+table.TableMantap td,
+table.TableMantap th {
+    border-width: 3px;
+    border-color: #66ff33;
+    border-style: outset;
+    padding: 3px;
 }
-
-th {
-    background-color: lightgray;
+table.TableMantap thead {
+    background-color: #003333;
 }

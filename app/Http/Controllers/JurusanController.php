@@ -43,7 +43,7 @@ class JurusanController extends Controller
     public function store(Request $request)
     {
         $newMajor = $request->validate([
-            'nama' => ['required', 'unique:tb_jurusan', 'regex:/^[A-Z][A-Za-z]+\s[A-Z][A-Za-z]+$/', 'max:191']
+            'nama' => ['required', 'unique:tb_jurusan', 'regex:/^[A-Z][a-z\s]+((\s[A-Z][a-z]+)*)$/u', 'max:191']
         ]);
         Jurusan::create($newMajor);
         return redirect(route('jurusan.index'))->with('success', 'Data jurusan berhasil ditambah');
@@ -87,7 +87,7 @@ class JurusanController extends Controller
             return 'unique:tb_jurusan';
         }
         $updatedMajor = $request->validate([
-            'nama' => ['required', cekPerubahanNama($request, $jurusan), 'regex:/^[A-Z][A-Za-z]+\s[A-Z][A-Za-z]+$/', 'max:191']
+            'nama' => ['required', cekPerubahanNama($request, $jurusan), 'regex:/^[A-Z][a-z\s]+((\s[A-Z][a-z]+)*)$/u', 'max:191']
         ]);
         $jurusan->update($updatedMajor);
         return redirect(route('jurusan.index'))->with('warning', 'Data jurusan berhasil diubah');

@@ -15,7 +15,7 @@
                             <br><span style="color: red">{{ $message }}</span>
                         @enderror
                     </td>
-                    
+
                 </tr>
                 <tr>
                     <td width="25%">NAMA GURU</td>
@@ -65,5 +65,5 @@
             </table>
         </form>
     </x-slot>
-</x-tabel>
+</x-input>
 @endsection

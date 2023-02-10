@@ -63,5 +63,5 @@
             </table>
         </form>
     </x-slot>
-</x-tabel>
+</x-input>
 @endsection

@@ -1,16 +1,16 @@
 @extends('layouts.main')
-@section('title', 'Jurusan')
+@section('title', 'Mapel')
 @section('content')
 <x-input>
-    <x-slot:title>Tambah Data Jurusan</x-slot>
+    <x-slot:title>Edit Data {{ $mapel->nama }}</x-slot>
     <x-slot:form>
-        <form action="{{ route('jurusan.store') }}" method="post">
-            @csrf
+        <form action="{{ route('mapel.update', $mapel->id) }}" method="post">
+            @csrf @method('put')
             <table width="50%">
                 <tr>
-                    <td width="25%">NAMA JURUSAN</td>
+                    <td width="25%">NAMA MATAPELAJARAN</td>
                     <td width="25%">
-                        <input style="padding:6px 0;" type="text" name="nama" value="{{ old('nama') }}" size="35" placeholder="contoh: Rekayasa Perangkat Lunak">
+                        <input style="padding:6px 0;" type="text" name="nama" value="{{ old('nama', $mapel->nama) }}" size="35" placeholder="contoh: Matematika">
                         @error('nama')
                             <br><span style="color: red">{{ $message }}</span>
                         @enderror

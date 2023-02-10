@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>WEB PENILAIAN</title>
   <style>
     body {
         background-color: #A9C9FF;
@@ -48,7 +49,7 @@
       <h2>Halaman : <a href="{{ route('jurusan.index') }}">Jurusan</a></h2>
     </div>
     <div class="card">
-      <h2>Halaman : <a href="">Mapel</a></h2>
+      <h2>Halaman : <a href="{{ route('mapel.index') }}">Mapel</a></h2>
     </div>
     <div class="card">
       <h2>Halaman : Kelas</h2>

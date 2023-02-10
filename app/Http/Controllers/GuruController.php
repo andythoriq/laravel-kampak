@@ -30,7 +30,7 @@ class GuruController extends Controller
     {
         $newTeacher = $request->validate([
             'nip' => ['required', 'unique:tb_guru', 'numeric', 'digits_between:1,18'],
-            'nama' => ['required', 'regex:/^[A-Z][a-z\s]+((\s[A-Z][a-z]+)*)$/u', 'max:191'],
+            'nama' => ['required', 'regex:/^[A-Z][a-z]+((\s[A-Z][a-z]+)*)$/u', 'max:191'],
             'jk' => ['required', 'in:L,P'],
             'alamat' => ['required'],
             'password' => ['required']
@@ -55,7 +55,7 @@ class GuruController extends Controller
     public function update(Request $request, Guru $guru)
     {
         $updatedTeacher = $request->validate([
-            'nama' => ['required', 'regex:/^[A-Z][a-z\s]+((\s[A-Z][a-z]+)*)$/u', 'max:191'],
+            'nama' => ['required', 'regex:/^[A-Z][a-z]+((\s[A-Z][a-z]+)*)$/u', 'max:191'],
             'jk' => ['required', 'in:L,P'],
             'alamat' => ['required'],
             'password' => ['required']
@@ -71,6 +71,6 @@ class GuruController extends Controller
         $namaGuru = $guru->nama;
         $idGuru = $guru->id;
         $guru->delete();
-        return back()->with('danger', "Data guru dengan ID, $idGuru dan dengan nama, $namaGuru berhasil dihapus");
+        return back()->with('danger', "Data guru dengan ID: $idGuru dan dengan nama: $namaGuru berhasil dihapus");
     }
 }

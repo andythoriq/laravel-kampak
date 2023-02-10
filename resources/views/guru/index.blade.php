@@ -26,7 +26,7 @@
                     <td>{{ $teacher->jk == 'L' ? 'Laki-Laki' : 'Perempuan'}}</td>
                     <td>{{ $teacher->alamat }}</td>
                     <td>{{ $teacher->password }}</td>
-                    <td><a href="{{ route('guru.edit', $teacher->id) }}" type="button">Edit</a></td>
+                    <td><a type="button" href="{{ route('guru.edit', $teacher->id) }}">Edit</a></td>
                     <td><form action="{{ route('guru.destroy', $teacher->id) }}" method="post"> @csrf @method('delete')
                         <button type="submit" onclick="return confirm('Menghapus data akan menghapus foreign key nya pada table yang memilikinya')">Hapus</button>
                     </td></form>

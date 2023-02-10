@@ -10,7 +10,7 @@
                 <tr>
                     <td width="25%">NAMA JURUSAN</td>
                     <td width="25%">
-                        <input style="padding:6px 0;" type="text" name="nama" value="{{ old('nama', $jurusan->nama) }}" size="35" placeholder="contoh: Rekayasa Perangkat Lunak">
+                        <input style="padding:6px 0;" type="text" name="nama" value="{{ old('nama', $jurusan->nama) }}" size="35" placeholder="contoh: Teknik Komputer Jaringan">
                         @error('nama')
                             <br><span style="color: red">{{ $message }}</span>
                         @enderror
@@ -24,5 +24,5 @@
             </table>
         </form>
     </x-slot>
-</x-tabel>
+</x-input>
 @endsection

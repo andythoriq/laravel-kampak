@@ -3,6 +3,7 @@
 @section('content')
 <x-input>
     <x-slot:title>Tambah Data Jurusan</x-slot>
+    <x-slot:back>jurusan</x-slot>
     <x-slot:form>
         <form action="{{ route('jurusan.store') }}" method="post">
             @csrf

@@ -80,14 +80,8 @@ class MapelController extends Controller
      */
     public function update(Request $request, Mapel $mapel)
     {
-        function cekPerubahanNama($request, $mapel){
-            if ($request->nama == $mapel->nama) {
-                return '';
-            }
-            return 'unique:tb_mapel';
-        }
         $updatedSubject = $request->validate([
-            'nama' => ['required', 'regex:/^[A-Z][a-z]+((\s[A-Z][a-z]+)*)$/u', 'max:191', cekPerubahanNama($request, $mapel)]
+            'nama' => ['required', 'regex:/^[A-Z][a-z]+((\s[A-Z][a-z]+)*)$/u', 'max:191', "unique:tb_mapel,nama,{$mapel->id}, id"]
         ]);
         $mapel->update($updatedSubject);
         return redirect(route('mapel.index'))->with('warning', 'Data matapelajaran berhasil diubah');
@@ -104,6 +98,6 @@ class MapelController extends Controller
         $namaMapel = $mapel->nama;
         $idMapel = $mapel->id;
         $mapel->delete();
-        return back()->with('danger', "Data matapelajaran dengan ID: $idMapel dan dengan nama: $namaMapel berhasil dihapus");
+        return redirect()->back()->with('danger', "Data matapelajaran dengan ID: $idMapel dan dengan nama: $namaMapel berhasil dihapus");
     }
 }

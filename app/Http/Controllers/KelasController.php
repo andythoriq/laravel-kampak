@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kelas;
+use App\Models\Jurusan;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class KelasController extends Controller
 {
@@ -14,7 +16,14 @@ class KelasController extends Controller
      */
     public function index()
     {
-        //
+        $classes = Kelas::all();
+        if($classes->count() <= 0){
+            session()->flash('message', [
+                'type' => 'warning',
+                'text' => 'Table kelas masih kosong'
+              ]);
+        }
+        return view('kelas.index', compact('classes'));
     }
 
     /**
@@ -24,7 +33,8 @@ class KelasController extends Controller
      */
     public function create()
     {
-        //
+        $subjects = Jurusan::select('id','nama')->get();
+        return view('kelas.create', compact('subjects'));
     }
 
     /**
@@ -35,7 +45,14 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $subjects_id = Jurusan::select('id')->get();
+        dd("in:$subjects_id");
+        $newClass = $request->validate([
+            'nama' => ['required', 'in:10,11,12,13', Rule::unique('tb_kelas', 'nama')->where(function ($query) use ($request) {
+                return $query->where('jurusan_id', $request->jurusan_id)->whereNull('deleted_at');
+            })],
+            'jurusan_id' => 'required'
+        ]);
     }
 
     /**

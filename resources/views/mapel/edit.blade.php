@@ -3,6 +3,7 @@
 @section('content')
 <x-input>
     <x-slot:title>Edit Data {{ $mapel->nama }}</x-slot>
+    <x-slot:back>mapel</x-slot>
     <x-slot:form>
         <form action="{{ route('mapel.update', $mapel->id) }}" method="post">
             @csrf @method('put')

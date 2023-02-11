@@ -80,14 +80,8 @@ class JurusanController extends Controller
      */
     public function update(Request $request, Jurusan $jurusan)
     {
-        function cekPerubahanNama($request, $jurusan){
-            if ($request->nama == $jurusan->nama) {
-                return '';
-            }
-            return 'unique:tb_jurusan';
-        }
         $updatedMajor = $request->validate([
-            'nama' => ['required', 'regex:/^[A-Z][a-z]+((\s[A-Z][a-z]+)*)$/u', 'max:191', cekPerubahanNama($request, $jurusan)]
+            'nama' => ['required', 'regex:/^[A-Z][a-z]+((\s[A-Z][a-z]+)*)$/u', 'max:191', "unique:tb_jurusan,nama,{$jurusan->id},id"]
         ]);
         $jurusan->update($updatedMajor);
         return redirect(route('jurusan.index'))->with('warning', 'Data jurusan berhasil diubah');
@@ -104,6 +98,6 @@ class JurusanController extends Controller
         $namaJurusan = $jurusan->nama;
         $idJurusan = $jurusan->id;
         $jurusan->delete();
-        return back()->with('danger', "Data jurusan dengan ID: $idJurusan dan dengan nama: $namaJurusan berhasil dihapus");
+        return redirect()->back()->with('danger', "Data jurusan dengan ID: $idJurusan dan dengan nama: $namaJurusan berhasil dihapus");
     }
 }

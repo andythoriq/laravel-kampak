@@ -3,6 +3,7 @@
 @section('content')
 <x-input>
     <x-slot:title>Edit Data {{ $guru->nama }}</x-slot>
+    <x-slot:back>guru</x-slot>
     <x-slot:form>
         <form action="{{ route('guru.update', $guru->id) }}" method="post">
             @csrf @method('put')

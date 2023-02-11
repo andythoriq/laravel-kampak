@@ -52,7 +52,7 @@
       <h2>Halaman : <a href="{{ route('mapel.index') }}">Mapel</a></h2>
     </div>
     <div class="card">
-      <h2>Halaman : Kelas</h2>
+      <h2>Halaman : <a href="{{ route('kelas.index') }}">Kelas</a></h2>
     </div>
     <div class="card">
       <h2>Halaman : Siswa</h2>

@@ -71,6 +71,6 @@ class GuruController extends Controller
         $namaGuru = $guru->nama;
         $idGuru = $guru->id;
         $guru->delete();
-        return back()->with('danger', "Data guru dengan ID: $idGuru dan dengan nama: $namaGuru berhasil dihapus");
+        return redirect()->back()->with('danger', "Data guru dengan ID: $idGuru dan dengan nama: $namaGuru berhasil dihapus");
     }
 }

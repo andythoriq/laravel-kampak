@@ -3,6 +3,7 @@
 @section('content')
     <x-input>
         <x-slot:title>Tambah Data Matapelajaran</x-slot>
+        <x-slot:back>mapel</x-slot>
         <x-slot:form>
             <form action="{{ route('mapel.store') }}" method="post">
                 @csrf

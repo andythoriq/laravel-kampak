@@ -48,6 +48,7 @@ class GuruController extends Controller
 
     public function edit(Guru $guru)
     {
+        dd($guru);
         return view('guru.edit', compact('guru'));
     }
 

@@ -10,9 +10,9 @@ use App\Http\Controllers\SiswaController;
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
-Route::resource('guru', GuruController::class)->except('show');
-Route::resource('siswa', SiswaController::class)->except('show');
-Route::resource('jurusan', JurusanController::class)->except('show');
-Route::resource('mapel', MapelController::class)->except('show');
-Route::resource('kelas', KelasController::class)->except('show');
-Route::resource('siswa', SiswaController::class)->except('show');
+Route::resource('/guru', GuruController::class)->except('show');
+Route::resource('/siswa', SiswaController::class)->except('show');
+Route::resource('/jurusan', JurusanController::class)->except('show');
+Route::resource('/mapel', MapelController::class)->except('show');
+Route::resource('/kelas', KelasController::class)->except('show');
+Route::resource('/siswa', SiswaController::class)->except('show');

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kelas;
 use App\Models\Jurusan;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+// use Illuminate\Validation\Rule;
 
 class KelasController extends Controller
 {
@@ -16,12 +16,9 @@ class KelasController extends Controller
      */
     public function index()
     {
-        $classes = Kelas::all();
+        $classes = Kelas::orderBy('nama', 'asc')->get();
         if($classes->count() <= 0){
-            session()->flash('message', [
-                'type' => 'warning',
-                'text' => 'Table kelas masih kosong'
-              ]);
+              Kelas::GeneralMessage('warning', 'Table kelas masih kosong');
         }
         return view('kelas.index', compact('classes'));
     }
@@ -45,14 +42,13 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        $subjects_id = Jurusan::select('id')->get();
-        dd("in:$subjects_id");
+        $subjectIds = Jurusan::getAllSubjectId();
         $newClass = $request->validate([
-            'nama' => ['required', 'in:10,11,12,13', Rule::unique('tb_kelas', 'nama')->where(function ($query) use ($request) {
-                return $query->where('jurusan_id', $request->jurusan_id)->whereNull('deleted_at');
-            })],
-            'jurusan_id' => 'required'
+            'nama' => ['required','in:10,11,12,13', 'unique:tb_kelas,nama,NULL,id,jurusan_id,' . $request->jurusan_id],
+            'jurusan_id' => ['required', "in:$subjectIds"],
         ]);
+        Kelas::create($newClass);
+        return redirect(route('kelas.index'))->with('success','Data kelas berhasil ditambah');
     }
 
     /**
@@ -61,9 +57,9 @@ class KelasController extends Controller
      * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function show(Kelas $kelas)
+    public function show(Kelas $kela)
     {
-        //
+        return "pal pa le pal pa le pa pale pale";
     }
 
     /**
@@ -72,9 +68,11 @@ class KelasController extends Controller
      * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kelas $kelas)
+    public function edit(Kelas $kela)
     {
-        //
+        $kelas = $kela;
+        $subjects = Jurusan::select('id', 'nama')->get();
+        return view('kelas.edit', compact('kelas', 'subjects'));
     }
 
     /**
@@ -84,9 +82,19 @@ class KelasController extends Controller
      * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kelas $kelas)
+    public function update(Request $request, Kelas $kela)
     {
-        //
+        $subjectIds = Jurusan::getAllSubjectId();
+        $updatedClass = $request->validate([
+            'nama' => ['required','in:10,11,12,13', "unique:tb_kelas,nama,{$kela->id},id,jurusan_id," . $request->jurusan_id],
+            'jurusan_id' => ['required', "in:$subjectIds"],
+        ]);
+        if(["nama" => $kela["nama"],"jurusan_id" => $kela["jurusan_id"]] == $updatedClass){
+            Kelas::GeneralMessage('warning', 'Tidak ada perubahan data');
+            return back();
+        }
+        $kela->update($updatedClass);
+        return redirect(route('kelas.index'))->with('warning', 'Data kelas berhasil diubah');
     }
 
     /**
@@ -95,8 +103,11 @@ class KelasController extends Controller
      * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kelas $kelas)
+    public function destroy(Kelas $kela)
     {
-        //
+        $idKelas = $kela->id;
+        $namaKelas = $kela->nama;
+        $kela->delete();
+        return redirect()->back()->with('danger', "Data kelas dengan ID: $idKelas dan dengan nama kelas: $namaKelas berhasil dihapus");
     }
 }

@@ -10,7 +10,7 @@ class Kelas extends Model
 {
     use HasFactory;
     protected $table = 'tb_kelas';
-    protected $fillable = ['nama'];
+    protected $fillable = ['nama', 'jurusan_id'];
     public function jurusan() {
         return $this->belongsTo(Jurusan::class, 'jurusan_id');
     }

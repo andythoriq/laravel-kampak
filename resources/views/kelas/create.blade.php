@@ -14,7 +14,7 @@
                             <select name="nama">
                                 <option value="">-- pilih kelas berapa --</option>
                                 @for ($i = 10; $i <= 13; $i++)
-                                    <option value="{{ $i }}">Kelas {{ $i }}</option>
+                                    <option value="{{ $i }}" @selected(old('nama') == $i)>Kelas {{ $i }}</option>
                                 @endfor
                             </select>
                             @error('nama')
@@ -28,7 +28,7 @@
                              <select name="jurusan_id">
                                 <option value="">-- pilih jurusan apa --</option>
                                 @foreach ($subjects as $subject)
-                                    <option value="{{ $subject->id }}">{{ $subject->nama }}</option>
+                                    <option value="{{ $subject->id }}" @selected(old('jurusan_id') == $subject->id)>{{ $subject->nama }}</option>
                                 @endforeach
                              </select>
                             @error('jurusan_id')

@@ -42,7 +42,8 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        $subjectIds = Jurusan::getAllSubjectId();
+        $subjectIds = Jurusan::getAllIds();
+        dd($subjectIds);
         $newClass = $request->validate([
             'nama' => ['required','in:10,11,12,13', 'unique:tb_kelas,nama,NULL,id,jurusan_id,' . $request->jurusan_id],
             'jurusan_id' => ['required', "in:$subjectIds"],
@@ -84,7 +85,7 @@ class KelasController extends Controller
      */
     public function update(Request $request, Kelas $kela)
     {
-        $subjectIds = Jurusan::getAllSubjectId();
+        $subjectIds = Jurusan::getAllIds();
         $updatedClass = $request->validate([
             'nama' => ['required','in:10,11,12,13', "unique:tb_kelas,nama,{$kela->id},id,jurusan_id," . $request->jurusan_id],
             'jurusan_id' => ['required', "in:$subjectIds"],

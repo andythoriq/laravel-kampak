@@ -4,8 +4,9 @@
     <title>WEB PENILAIAN</title>
   <style>
     body {
-        background-color: #A9C9FF;
-        background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+        background: #24C6DC;
+        background: -webkit-linear-gradient(to bottom, #514A9D, #24C6DC);
+        background: linear-gradient(to bottom, #514A9D, #24C6DC);
         font-family:Verdana, Tahoma, sans-serif
     }
     .container {

@@ -10,19 +10,19 @@
 
 @if (session()->has('warning'))
   <div class="alert alert-warning">
-    {{ session()->get('warning') }}
+    Warning : <b>{{ session()->get('warning') }}</b>
   </div>
 @endif
 
 @if (session()->has('success'))
   <div class="alert alert-success">
-    {{ session()->get('success') }}
+    Success : <b>{{ session()->get('success') }}</b>
   </div>
 @endif
 
 @if (session()->has('danger'))
   <div class="alert alert-danger">
-    {{ session()->get('danger') }}
+    Danger : <b>{{ session()->get('danger') }}</b>
   </div>
 @endif
 

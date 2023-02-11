@@ -16,10 +16,7 @@ class JurusanController extends Controller
     {
         $majors = Jurusan::all();
         if($majors->count() <= 0){
-            session()->flash('message', [
-                'type' => 'warning',
-                'text' => 'Table jurusan masih kosong'
-              ]);
+            Jurusan::GeneralMessage('warning', 'Tabel jurusan masih kosong');
         }
         return view('jurusan.index', compact('majors'));
     }
@@ -83,8 +80,12 @@ class JurusanController extends Controller
         $updatedMajor = $request->validate([
             'nama' => ['required', 'regex:/^[A-Z][a-z]+((\s[A-Z][a-z]+)*)$/u', 'max:191', "unique:tb_jurusan,nama,{$jurusan->id},id"]
         ]);
+        if(['nama' => $jurusan['nama']] == $updatedMajor){
+            Jurusan::GeneralMessage('warning', 'Tidak ada perubahan data');
+            return back();
+        }
         $jurusan->update($updatedMajor);
-        return redirect(route('jurusan.index'))->with('warning', 'Data jurusan berhasil diubah');
+        return redirect(route('jurusan.index'))->with('success', 'Data jurusan berhasil diubah');
     }
 
     /**
@@ -98,6 +99,6 @@ class JurusanController extends Controller
         $namaJurusan = $jurusan->nama;
         $idJurusan = $jurusan->id;
         $jurusan->delete();
-        return redirect()->back()->with('danger', "Data jurusan dengan ID: $idJurusan dan dengan nama: $namaJurusan berhasil dihapus");
+        return redirect()->back()->with('warning', "Data jurusan dengan ID: $idJurusan dan dengan nama: $namaJurusan telah dihapus");
     }
 }

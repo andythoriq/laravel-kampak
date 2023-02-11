@@ -16,10 +16,7 @@ class MapelController extends Controller
     {
         $subjects = Mapel::all();
         if($subjects->count() <= 0){
-            session()->flash('message', [
-                'type' => 'warning',
-                'text' => 'Table mapel masih kosong'
-              ]);
+            Mapel::GeneralMessage('warning', 'Tabel mapel masih kosong');
         }
         return view('mapel.index', compact('subjects'));
     }
@@ -81,10 +78,14 @@ class MapelController extends Controller
     public function update(Request $request, Mapel $mapel)
     {
         $updatedSubject = $request->validate([
-            'nama' => ['required', 'regex:/^[A-Z][a-z]+((\s[A-Z][a-z]+)*)$/u', 'max:191', "unique:tb_mapel,nama,{$mapel->id}, id"]
+            'nama' => ['required', 'regex:/^[A-Z][a-z]+((\s[A-Z][a-z]+)*)$/u', 'max:191', "unique:tb_mapel,nama,{$mapel->id},id"]
         ]);
+        if(['nama' => $mapel['nama']] == $updatedSubject){
+            Mapel::GeneralMessage('warning', 'Tidak ada perubahan data');
+            return back();
+        }
         $mapel->update($updatedSubject);
-        return redirect(route('mapel.index'))->with('warning', 'Data matapelajaran berhasil diubah');
+        return redirect(route('mapel.index'))->with('success', 'Data matapelajaran berhasil diubah');
     }
 
     /**
@@ -98,6 +99,6 @@ class MapelController extends Controller
         $namaMapel = $mapel->nama;
         $idMapel = $mapel->id;
         $mapel->delete();
-        return redirect()->back()->with('danger', "Data matapelajaran dengan ID: $idMapel dan dengan nama: $namaMapel berhasil dihapus");
+        return redirect()->back()->with('warning', "Data matapelajaran dengan ID: $idMapel dan dengan nama: $namaMapel telah dihapus");
     }
 }

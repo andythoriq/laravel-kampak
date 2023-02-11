@@ -8,10 +8,10 @@
         <table class="TableMantap">
             <thead>
                 <tr>
-                    <td>NO</td>
-                    <td>KELAS</td>
-                    <td>JURUSAN</td>
-                    <td colspan="2">ACTION</td>
+                    <th>NO</th>
+                    <th>KELAS</th>
+                    <th>JURUSAN</th>
+                    <th colspan="2">ACTION</th>
                 </tr>
             </thead>
             <tbody>

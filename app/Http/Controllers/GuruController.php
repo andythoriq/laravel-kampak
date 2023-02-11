@@ -11,10 +11,7 @@ class GuruController extends Controller
     {
         $teachers = Guru::all();
         if($teachers->count() <= 0){
-            session()->flash('message', [
-                'type' => 'warning',
-                'text' => 'Table guru masih kosong'
-              ]);
+            Guru::GeneralMessage('warning', 'Tabel guru masih kosong');
         }
         return view('guru.index', compact('teachers'));
     }
@@ -48,7 +45,6 @@ class GuruController extends Controller
 
     public function edit(Guru $guru)
     {
-        dd($guru);
         return view('guru.edit', compact('guru'));
     }
 
@@ -61,9 +57,13 @@ class GuruController extends Controller
             'alamat' => ['required'],
             'password' => ['required']
         ]);
+        if(['nama' => $guru['nama'], 'jk' => $guru['jk'], 'alamat' => $guru['alamat'], 'password' => $guru['password']] == $updatedTeacher){
+            Guru::GeneralMessage('warning', 'Tidak ada perubahan data');
+            return back();
+        }
         $updatedTeacher['nip'] = $guru->nip;
         $guru->update($updatedTeacher);
-        return redirect(route('guru.index'))->with('warning', 'Data guru berhasil diubah');
+        return redirect(route('guru.index'))->with('success', 'Data guru berhasil diubah');
     }
 
 
@@ -72,6 +72,6 @@ class GuruController extends Controller
         $namaGuru = $guru->nama;
         $idGuru = $guru->id;
         $guru->delete();
-        return redirect()->back()->with('danger', "Data guru dengan ID: $idGuru dan dengan nama: $namaGuru berhasil dihapus");
+        return redirect()->back()->with('warning', "Data guru dengan ID: $idGuru dan dengan nama: $namaGuru telah dihapus");
     }
 }

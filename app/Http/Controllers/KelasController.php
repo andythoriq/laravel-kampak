@@ -18,7 +18,7 @@ class KelasController extends Controller
     {
         $classes = Kelas::orderBy('nama', 'asc')->get();
         if($classes->count() <= 0){
-              Kelas::GeneralMessage('warning', 'Table kelas masih kosong');
+              Kelas::GeneralMessage('warning', 'Tabel kelas masih kosong');
         }
         return view('kelas.index', compact('classes'));
     }
@@ -42,8 +42,7 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        $subjectIds = Jurusan::getAllIds();
-        dd($subjectIds);
+        $subjectIds = Jurusan::getAllColumn('id');
         $newClass = $request->validate([
             'nama' => ['required','in:10,11,12,13', 'unique:tb_kelas,nama,NULL,id,jurusan_id,' . $request->jurusan_id],
             'jurusan_id' => ['required', "in:$subjectIds"],
@@ -85,7 +84,7 @@ class KelasController extends Controller
      */
     public function update(Request $request, Kelas $kela)
     {
-        $subjectIds = Jurusan::getAllIds();
+        $subjectIds = Jurusan::getAllColumn('id');
         $updatedClass = $request->validate([
             'nama' => ['required','in:10,11,12,13', "unique:tb_kelas,nama,{$kela->id},id,jurusan_id," . $request->jurusan_id],
             'jurusan_id' => ['required', "in:$subjectIds"],
@@ -95,7 +94,7 @@ class KelasController extends Controller
             return back();
         }
         $kela->update($updatedClass);
-        return redirect(route('kelas.index'))->with('warning', 'Data kelas berhasil diubah');
+        return redirect(route('kelas.index'))->with('success', 'Data kelas berhasil diubah');
     }
 
     /**
@@ -109,6 +108,6 @@ class KelasController extends Controller
         $idKelas = $kela->id;
         $namaKelas = $kela->nama;
         $kela->delete();
-        return redirect()->back()->with('danger', "Data kelas dengan ID: $idKelas dan dengan nama kelas: $namaKelas berhasil dihapus");
+        return redirect()->back()->with('warning', "Data kelas dengan ID: $idKelas dan dengan nama kelas: $namaKelas telah dihapus");
     }
 }

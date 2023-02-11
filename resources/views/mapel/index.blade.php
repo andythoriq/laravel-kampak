@@ -8,9 +8,9 @@
         <table class="TableMantap">
             <thead>
                 <tr>
-                    <td>NO</td>
-                    <td>MATA PELAJARAN</td>
-                    <td colspan="2">ACTION</td>
+                    <th>NO</th>
+                    <th>MATA PELAJARAN</th>
+                    <th colspan="2">ACTION</th>
                 </tr>
             </thead>
             <tbody>

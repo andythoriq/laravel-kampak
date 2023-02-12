@@ -10,7 +10,7 @@ class SiswaController extends Controller
 {
     public function index()
     {
-        $students = Siswa::all();
+        $students = Siswa::with('kelas.jurusan')->get();
         if($students->count() <= 0){
             Siswa::GeneralMessage('warning', 'Tabel siswa masih kosong');
         }
@@ -20,7 +20,7 @@ class SiswaController extends Controller
 
     public function create()
     {
-        $classes = Kelas::select('id', 'nama', 'jurusan_id')->orderBy('nama', 'asc')->get();
+        $classes = Kelas::with('jurusan')->select('id', 'nama', 'jurusan_id')->orderBy('nama', 'asc')->get();
         return view('siswa.create', compact('classes'));
     }
 
@@ -49,7 +49,7 @@ class SiswaController extends Controller
 
     public function edit(Siswa $siswa)
     {
-        $classes = Kelas::select('id', 'nama', 'jurusan_id')->orderBy('nama', 'asc')->get();
+        $classes = Kelas::with('jurusan')->select('id', 'nama', 'jurusan_id')->orderBy('nama', 'asc')->get();
         return view('siswa.edit', compact('siswa', 'classes'));
     }
 

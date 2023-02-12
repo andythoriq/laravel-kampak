@@ -16,7 +16,7 @@ class KelasController extends Controller
      */
     public function index()
     {
-        $classes = Kelas::orderBy('nama', 'asc')->get();
+        $classes = Kelas::with('jurusan')->orderBy('nama', 'asc')->get();
         if($classes->count() <= 0){
               Kelas::GeneralMessage('warning', 'Tabel kelas masih kosong');
         }

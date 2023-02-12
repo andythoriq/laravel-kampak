@@ -39,7 +39,7 @@ class GuruController extends Controller
 
     public function show(Guru $guru)
     {
-        return dd($guru);
+        return "awokawokawokawokawokawok";
     }
 
 

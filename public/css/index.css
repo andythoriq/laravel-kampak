@@ -4,6 +4,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
+    font-family: "Arial Narrow Bold", sans-serif;
 }
 body a {
     color: white;

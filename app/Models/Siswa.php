@@ -14,7 +14,7 @@ class Siswa extends Model
     use GeneralMessage;
     use GetAllColumn;
     protected $table = 'tb_siswa';
-    protected $fillable = ['nis', 'nama', 'jk', 'alamat', 'password'];
+    protected $fillable = ['nis', 'nama', 'jk', 'alamat', 'password', 'kelas_id'];
     public function kelas() {
         return $this->belongsTo(Kelas::class, 'kelas_id');
     }

@@ -9,7 +9,7 @@
                 @csrf
                 <table width="50%">
                     <tr>
-                        <td width="25%">NAMA KELAS</td>
+                        <td width="25%">KELAS</td>
                         <td width="25%">
                             <select name="nama">
                                 <option value="">-- pilih kelas berapa --</option>

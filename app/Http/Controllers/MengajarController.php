@@ -17,7 +17,7 @@ class MengajarController extends Controller
      */
     public function index()
     {
-        $teachings = Mengajar::with(['guru', 'mapel', 'kelas'])->get();
+        $teachings = Mengajar::with(['guru:id,nama', 'mapel:id,nama', 'kelas.jurusan:id,nama'])->get();
         if($teachings->count() <= 0){
               Mengajar::GeneralMessage('warning', 'Tabel mengajar masih kosong');
         }
@@ -33,7 +33,7 @@ class MengajarController extends Controller
     {
         $teachers = Guru::select('id', 'nama')->get();
         $subjects = Mapel::select('id', 'nama')->get();
-        $classes = Kelas::select('id', 'nama')->with('jurusan')->get();
+        $classes = Kelas::with('jurusan')->select('id', 'nama', 'jurusan_id')->orderBy('nama', 'asc')->get();
         return view('mengajar.create', compact('teachers', 'subjects', 'classes'));
     }
 
@@ -45,7 +45,7 @@ class MengajarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**

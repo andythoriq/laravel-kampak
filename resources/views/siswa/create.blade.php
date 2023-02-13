@@ -54,9 +54,9 @@
                     <td width="25%">KELAS</td>
                     <td width="25%">
                         <select name="kelas_id">
-                            <option value="">-- pilih kelas apa --</option>
+                            <option value="">-- pilih kelas (jurusan) --</option>
                             @foreach ($classes as $class)
-                                <option value="{{ $class->id }}" @selected(old('kelas_id') == $class->id)>{{ $class->nama }} || {{ $class->jurusan->nama }}</option>
+                                <option value="{{ $class->id }}" @selected(old('kelas_id') == $class->id)>{{ $class->nama }} {{ $class->jurusan->nama }}</option>
                             @endforeach
                          </select>
                         @error('kelas_id')

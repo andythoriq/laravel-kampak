@@ -3,13 +3,17 @@ namespace App\Traits;
 
 trait GetAllColumn
 {
-    public static function getAllColumn($column = 'id')
+    public static function getAllColumn($field = 'id', $array = false)
     {
-        $models = (new self)->select($column)->get();
+        $models = (new self)->select($field)->get();
         $string = '';
         foreach ($models as $model) {
-            $string .= $model->{$column} . ',';
+            $string .= $model->{$field} . ',';
         }
-        return rtrim($string, ',');
+        $columns =  rtrim($string, ',');
+        if($array){
+            return array_map('intval', explode(",", $columns));
+        }
+        return $columns;
     }
 }

@@ -9,16 +9,16 @@
             <thead>
                 <tr>
                     <th>NO</th>
-                    <th>MENGAJAR</th>
-                    <th>JURUSAN</th>
-                    <th>JURUSAN</th>
+                    <th>NAMA GURU</th>
+                    <th>MATAPELAJARAN</th>
+                    <th>KELAS</th>
                     <th colspan="2">ACTION</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($teachings as $teaching)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $loop->iteration }}.</td>
                         <td>{{ $teaching->nama }}</td>
                         <td>{{ $teaching->jurusan->nama }}</td>
                         <td><a type="button" href="{{ route('mengajar.edit', $teaching->id) }}">Edit</a></td>

@@ -16,7 +16,7 @@
             <tbody>
                 @foreach ($majors as $major)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $loop->iteration }}.</td>
                         <td>{{ $major->nama }}</td>
                         <td><a type="button" href="{{ route('jurusan.edit', $major->id) }}">Edit</a></td>
                         <td><form action="{{ route('jurusan.destroy', $major->id) }}" method="post">@csrf @method('delete')

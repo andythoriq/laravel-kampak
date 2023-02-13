@@ -20,7 +20,7 @@
             <tbody>
             @foreach ($teachers as $teacher)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $loop->iteration }}.</td>
                     <td>{{ $teacher->nip }}</td>
                     <td>{{ $teacher->nama }}</td>
                     <td>{{ $teacher->jk == 'L' ? 'Laki-Laki' : 'Perempuan'}}</td>

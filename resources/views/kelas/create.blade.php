@@ -27,8 +27,8 @@
                         <td width="25%">
                              <select name="jurusan_id">
                                 <option value="">-- pilih jurusan apa --</option>
-                                @foreach ($subjects as $subject)
-                                    <option value="{{ $subject->id }}" @selected(old('jurusan_id') == $subject->id)>{{ $subject->nama }}</option>
+                                @foreach ($majors as $major)
+                                    <option value="{{ $major->id }}" @selected(old('jurusan_id') == $major->id)>{{ $major->nama }}</option>
                                 @endforeach
                              </select>
                             @error('jurusan_id')

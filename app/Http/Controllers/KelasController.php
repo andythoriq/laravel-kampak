@@ -30,8 +30,8 @@ class KelasController extends Controller
      */
     public function create()
     {
-        $subjects = Jurusan::select('id','nama')->get();
-        return view('kelas.create', compact('subjects'));
+        $majors = Jurusan::select('id','nama')->get();
+        return view('kelas.create', compact('majors'));
     }
 
     /**
@@ -71,8 +71,8 @@ class KelasController extends Controller
     public function edit(Kelas $kela)
     {
         $kelas = $kela;
-        $subjects = Jurusan::select('id', 'nama')->get();
-        return view('kelas.edit', compact('kelas', 'subjects'));
+        $majors = Jurusan::select('id', 'nama')->get();
+        return view('kelas.edit', compact('kelas', 'majors'));
     }
 
     /**

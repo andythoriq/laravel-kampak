@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guru;
+use App\Models\Kelas;
+use App\Models\Mapel;
 use App\Models\Mengajar;
 use Illuminate\Http\Request;
 
@@ -28,7 +31,10 @@ class MengajarController extends Controller
      */
     public function create()
     {
-        //
+        $teachers = Guru::select('id', 'nama')->get();
+        $subjects = Mapel::select('id', 'nama')->get();
+        $classes = Kelas::select('id', 'nama')->with('jurusan')->get();
+        return view('mengajar.create', compact('teachers', 'subjects', 'classes'));
     }
 
     /**

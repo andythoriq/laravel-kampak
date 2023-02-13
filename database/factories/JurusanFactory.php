@@ -17,7 +17,9 @@ class JurusanFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'nama' => fake()->unique()->randomElement([
+                'Rekayasa Perangkat Lunak', 'Teknik Komputer Jaringan', 'Sistem Informatika Jaringan Aplikasi', 'Teknik Kendaraan Ringan Otomotif', 'Multimedia', 'Teknik Pemesinan', 'Teknik Fabrikasi Logam Manufaktur', 'Teknik Otomasi Industri', 'Bisnis Konstruksi Properti', 'Desain Pemodelan Informasi Bangunan'
+            ])
         ];
     }
 }

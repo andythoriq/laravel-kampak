@@ -57,6 +57,7 @@ class GuruController extends Controller
             'alamat' => ['required'],
             'password' => ['required']
         ]);
+        $updatedTeacher['alamat'] = str_replace("\r", "", $updatedTeacher['alamat']);
         if(['nama' => $guru['nama'], 'jk' => $guru['jk'], 'alamat' => $guru['alamat'], 'password' => $guru['password']] == $updatedTeacher){
             Guru::GeneralMessage('warning', 'Tidak ada perubahan data');
             return back();

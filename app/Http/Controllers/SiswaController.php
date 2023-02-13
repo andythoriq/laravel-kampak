@@ -56,13 +56,16 @@ class SiswaController extends Controller
 
     public function update(Request $request, Siswa $siswa)
     {
+        $classIds = Kelas::getAllColumn('id');
         $updatedStudent = $request->validate([
             'nama' => ['required', 'regex:/^[A-Z][a-z]+((\s[A-Z][a-z]+)*)$/u', 'max:191'],
             'jk' => ['required', 'in:L,P'],
             'alamat' => ['required'],
+            'kelas_id' => ['required', "in:$classIds"],
             'password' => ['required']
         ]);
-        if(['nama' => $siswa['nama'], 'jk' => $siswa['jk'], 'alamat' => $siswa['alamat'], 'password' => $siswa['password']] == $updatedStudent){
+        $updatedStudent['alamat'] = str_replace("\r", "", $updatedStudent['alamat']);
+        if(['nama' => $siswa['nama'], 'jk' => $siswa['jk'], 'alamat' => $siswa['alamat'], 'kelas_id' => $siswa['kelas_id'], 'password' => $siswa['password']] == $updatedStudent){
             Siswa::GeneralMessage('warning', 'Tidak ada perubahan data');
             return back();
         }

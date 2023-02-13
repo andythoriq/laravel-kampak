@@ -14,7 +14,11 @@ class MengajarController extends Controller
      */
     public function index()
     {
-        //
+        $teachings = Mengajar::with(['guru', 'mapel', 'kelas'])->get();
+        if($teachings->count() <= 0){
+              Mengajar::GeneralMessage('warning', 'Tabel mengajar masih kosong');
+        }
+        return view('mengajar.index', compact('teachings'));
     }
 
     /**

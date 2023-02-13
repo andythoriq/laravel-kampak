@@ -15,7 +15,7 @@ class Mengajar extends Model
     use HasFactory;
     use GeneralMessage;
     use GetAllColumn;
-    protected $table = 'tb_mangajar';
+    protected $table = 'tb_mengajar';
     protected $fillable = ['guru_id', 'mapel_id', 'kelas_id'];
     public function guru() {
         return $this->belongsTo(Guru::class, 'guru_id');

@@ -59,6 +59,9 @@
       <h2>Halaman : <a href="{{ route('siswa.index') }}">Siswa</a></h2>
     </div>
     <div class="card">
+      <h2>Halaman : <a href="{{ route('mengajar.index') }}">Mengajar</a></h2>
+    </div>
+    <div class="card">
       <h2>Halaman : </h2>
     </div>
     <div class="card">

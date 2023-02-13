@@ -17,10 +17,10 @@ class KelasFactory extends Factory
      */
     public function definition()
     {
-        $subjectIds = Jurusan::getAllColumn('id',true);
+        $subjectCount = Jurusan::count();
         return [
             'nama' => '12',
-            'jurusan_id' => fake()->unique()->randomElement($subjectIds)
+            'jurusan_id' => fake()->unique()->numberBetween(1, $subjectCount)
         ];
     }
 }

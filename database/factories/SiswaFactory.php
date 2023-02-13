@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\Kelas;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Guru>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Siswa>
  */
-class GuruFactory extends Factory
+class SiswaFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,11 +17,13 @@ class GuruFactory extends Factory
      */
     public function definition()
     {
+        $classCount = Kelas::count();
         return [
-            'nip' => fake()->unique()->numberBetween(1000000, 9999999) . 69,
+            'nis' => fake()->unique()->numberBetween(1000000, 9999999) . 666,
             'nama' => ucwords(fake()->firstName() . ' ' . fake()->lastName()),
             'jk' => fake()->randomElement(['L', 'P']),
             'alamat' => fake()->address(),
+            'kelas_id' => fake()->numberBetween(1, $classCount),
             'password' => '123'
         ];
     }

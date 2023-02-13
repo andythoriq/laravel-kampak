@@ -16,7 +16,7 @@
             <tbody>
                 @foreach ($subjects as $subject)
                     <tr>
-                        <td>{{ $loop->iteration }}.</td>
+                        <th>{{ $loop->iteration }}.</th>
                         <td>{{ $subject->nama }}</td>
                         <td><a type="button" href="{{ route('mapel.edit', $subject->id) }}">Edit</a></td>
                         <td><form action="{{ route('mapel.destroy', $subject->id) }}" method="post"> @csrf @method('delete')

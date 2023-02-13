@@ -21,7 +21,7 @@
             <tbody>
             @foreach ($students as $student)
                 <tr>
-                    <td>{{ $loop->iteration }}.</td>
+                    <th>{{ $loop->iteration }}.</th>
                     <td>{{ $student->nis }}</td>
                     <td>{{ $student->nama }}</td>
                     <td>{{ $student->jk == 'L' ? 'Laki-Laki' : 'Perempuan' }}</td>

@@ -18,7 +18,7 @@
             <tbody>
                 @foreach ($teachings as $teaching)
                     <tr>
-                        <td>{{ $loop->iteration }}.</td>
+                        <th>{{ $loop->iteration }}.</th>
                         <td>{{ $teaching->nama }}</td>
                         <td>{{ $teaching->jurusan->nama }}</td>
                         <td><a type="button" href="{{ route('mengajar.edit', $teaching->id) }}">Edit</a></td>

@@ -17,7 +17,7 @@
             <tbody>
                 @foreach ($classes as $class)
                     <tr>
-                        <td>{{ $loop->iteration }}.</td>
+                        <th>{{ $loop->iteration }}.</th>
                         <td>{{ $class->nama }}</td>
                         <td>{{ $class->jurusan->nama ?? '*tidak ada' }}</td>
                         <td><a type="button" href="{{ route('kelas.edit', $class->id) }}">Edit</a></td>

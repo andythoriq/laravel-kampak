@@ -13,7 +13,7 @@ class Nilai extends Model
     use GeneralMessage;
     use GetAllColumn;
     protected $table = 'tb_nilai';
-    protected $fillable = ['uh', 'uts', 'uas', 'na'];
+    protected $fillable = ['uh', 'uts', 'uas', 'na', 'mengajar_id', 'siswa_id'];
     public function mengajar() {
         return $this->belongsTo(Mengajar::class, 'mengajar_id');
     }

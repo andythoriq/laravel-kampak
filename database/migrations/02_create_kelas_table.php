@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('tb_kelas', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->foreignId('jurusan_id')->constrained('tb_jurusan');
+            $table->foreignId('jurusan_id')->nullable()->constrained('tb_jurusan')->onUpdate('cascade')->onDelete('set null');
             $table->timestamps();
         });
     }

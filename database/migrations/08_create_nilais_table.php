@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('tb_nilai', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mengajar_id')->constrained('tb_mengajar');
-            $table->foreignId('siswa_id')->constrained('tb_siswa');
+            $table->foreignId('mengajar_id')->nullable()->constrained('tb_mengajar')->onUpdate('cascade')->onDelete('set null');
+            $table->foreignId('siswa_id')->nullable()->constrained('tb_siswa')->onUpdate('cascade')->onDelete('set null');
             $table->double('uh');
             $table->double('uts');
             $table->double('uas');

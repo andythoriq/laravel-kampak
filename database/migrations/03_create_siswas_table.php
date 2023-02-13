@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nama');
             $table->enum('jk', ['L', 'P']);
             $table->text('alamat');
-            $table->foreignId('kelas_id')->constrained('tb_kelas');
+            $table->foreignId('kelas_id')->nullable()->constrained('tb_kelas')->onUpdate('cascade')->onDelete('set null');
             $table->string('password');
             $table->timestamps();
         });

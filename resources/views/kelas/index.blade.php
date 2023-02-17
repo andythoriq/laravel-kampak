@@ -19,7 +19,7 @@
                     <tr>
                         <th>{{ $loop->iteration }}.</th>
                         <td>{{ $class->nama }}</td>
-                        <td>{{ $class->jurusan->nama ?? '*tidak ada' }}</td>
+                        <td>{{ $class->jurusan->nama }}</td>
                         <td><a type="button" href="{{ route('kelas.edit', $class->id) }}">Edit</a></td>
                         <td><form action="{{ route('kelas.destroy', $class->id) }}" method="post"> @csrf @method('delete')
                             <button type="submit" onclick="return confirm('Menghapus data akan menghapus foreign key nya pada table yang memilikinya')">Hapus</button>

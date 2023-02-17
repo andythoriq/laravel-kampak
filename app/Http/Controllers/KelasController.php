@@ -16,7 +16,7 @@ class KelasController extends Controller
      */
     public function index()
     {
-        $classes = Kelas::with('jurusan')->orderBy('nama', 'asc')->get();
+        $classes = Kelas::with('jurusan:id,nama')->orderBy('nama', 'asc')->get();
         if($classes->count() <= 0){
               Kelas::GeneralMessage('warning', 'Tabel kelas masih kosong');
         }
@@ -42,10 +42,10 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
-        $subjectIds = Jurusan::getAllColumn('id');
+        $majorIds = Jurusan::getAllColumn('id');
         $newClass = $request->validate([
             'nama' => ['required','in:10,11,12,13', 'unique:tb_kelas,nama,NULL,id,jurusan_id,' . $request->jurusan_id],
-            'jurusan_id' => ['required', "in:$subjectIds"],
+            'jurusan_id' => ['required', "in:$majorIds"],
         ]);
         Kelas::create($newClass);
         return redirect(route('kelas.index'))->with('success','Data kelas berhasil ditambah');
@@ -84,10 +84,10 @@ class KelasController extends Controller
      */
     public function update(Request $request, Kelas $kela)
     {
-        $subjectIds = Jurusan::getAllColumn('id');
+        $majorIds = Jurusan::getAllColumn('id');
         $updatedClass = $request->validate([
             'nama' => ['required','in:10,11,12,13', "unique:tb_kelas,nama,{$kela->id},id,jurusan_id," . $request->jurusan_id],
-            'jurusan_id' => ['required', "in:$subjectIds"],
+            'jurusan_id' => ['required', "in:$majorIds"],
         ]);
         if(["nama" => $kela["nama"],"jurusan_id" => $kela["jurusan_id"]] == $updatedClass){
             Kelas::GeneralMessage('warning', 'Tidak ada perubahan data');

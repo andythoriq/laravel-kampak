@@ -19,9 +19,9 @@
                 @foreach ($teachings as $teaching)
                     <tr>
                         <th>{{ $loop->iteration }}.</th>
-                        <td>{{ $teaching->guru->nama ?? '*tidak ada' }}</td>
-                        <td>{{ $teaching->mapel->nama ?? '*tidak ada'}}</td>
-                        <td>{{ $teaching->kelas->nama ?? '' }} {{ $teaching->kelas->jurusan->nama ?? '*tidak ada' }}</td>
+                        <td>{{ $teaching->guru->nama }}</td>
+                        <td>{{ $teaching->mapel->nama }}</td>
+                        <td>{{ $teaching->kelas->nama ?? '' }} {{ $teaching->kelas->jurusan->nama }}</td>
                         <td><a type="button" href="{{ route('mengajar.edit', $teaching->id) }}">Edit</a></td>
                         <td><form action="{{ route('mengajar.destroy', $teaching->id) }}" method="post"> @csrf @method('delete')
                             <button type="submit" onclick="return confirm('Menghapus data akan menghapus foreign key nya pada table yang memilikinya')">Hapus</button>

@@ -33,7 +33,7 @@ class MengajarController extends Controller
     {
         $teachers = Guru::select('id', 'nama')->get();
         $subjects = Mapel::select('id', 'nama')->get();
-        $classes = Kelas::with('jurusan')->select('id', 'nama', 'jurusan_id')->orderBy('nama', 'asc')->get();
+        $classes = Kelas::with('jurusan:id,nama')->select('id', 'nama', 'jurusan_id')->orderBy('nama', 'asc')->get();
         return view('mengajar.create', compact('teachers', 'subjects', 'classes'));
     }
 
@@ -45,7 +45,16 @@ class MengajarController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $teacherIds = Guru::getAllColumn('id');
+        $subjectIds = Mapel::getAllColumn('id');
+        $classIds = Kelas::getAllColumn('id');
+        $newTeaching = $request->validate([
+            'guru_id' => ['required',"in:$teacherIds"],
+            'mapel_id' => ['required', "in:$subjectIds"],
+            'kelas_id' => ['required', "in:$classIds"]
+        ]);
+        Mengajar::create($newTeaching);
+        return redirect(route('mengajar.index'))->with('success','Data mengajar berhasil ditambah');
     }
 
     /**
@@ -56,7 +65,7 @@ class MengajarController extends Controller
      */
     public function show(Mengajar $mengajar)
     {
-        //
+        return "asu";
     }
 
     /**
@@ -67,7 +76,10 @@ class MengajarController extends Controller
      */
     public function edit(Mengajar $mengajar)
     {
-        //
+        $teachers = Guru::select('id', 'nama')->get();
+        $subjects = Mapel::select('id', 'nama')->get();
+        $classes = Kelas::with('jurusan:id,nama')->select('id', 'nama', 'jurusan_id')->orderBy('nama', 'asc')->get();
+        return view('mengajar.edit', compact('mengajar', 'teachers', 'subjects', 'classes'));
     }
 
     /**
@@ -79,7 +91,20 @@ class MengajarController extends Controller
      */
     public function update(Request $request, Mengajar $mengajar)
     {
-        //
+        $teacherIds = Guru::getAllColumn('id');
+        $subjectIds = Mapel::getAllColumn('id');
+        $classIds = Kelas::getAllColumn('id');
+        $updatedTeaching = $request->validate([
+            'guru_id' => ['required',"in:$teacherIds"],
+            'mapel_id' => ['required', "in:$subjectIds"],
+            'kelas_id' => ['required', "in:$classIds"]
+        ]);
+        if(['guru_id' => $mengajar['guru_id'], 'mapel_id' => $mengajar['mapel_id'], 'kelas_id' => $mengajar['kelas_id']] == $updatedTeaching){
+            Mengajar::GeneralMessage('warning', 'Tidak ada perubahan data');
+            return back();
+        }
+        $mengajar->update($updatedTeaching);
+        return redirect(route('mengajar.index'))->with('success', 'Data mengajar berhasil diubah');
     }
 
     /**
@@ -90,6 +115,8 @@ class MengajarController extends Controller
      */
     public function destroy(Mengajar $mengajar)
     {
-        //
+        $idMengajar = $mengajar->id;
+        $mengajar->delete();
+        return redirect()->back()->with('warning', "Data mengajar dengan ID: $idMengajar telah dihapus");
     }
 }

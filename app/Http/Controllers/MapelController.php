@@ -81,8 +81,7 @@ class MapelController extends Controller
             'nama' => ['required', 'regex:/^[A-Z][a-z]+((\s[A-Z][a-z]+)*)$/u', 'max:191', "unique:tb_mapel,nama,{$mapel->id},id"]
         ]);
         if(['nama' => $mapel['nama']] == $updatedSubject){
-            Mapel::GeneralMessage('warning', 'Tidak ada perubahan data');
-            return back();
+            return back()->with('warning', 'Tidak ada perubahan data');
         }
         $mapel->update($updatedSubject);
         return redirect(route('mapel.index'))->with('success', 'Data matapelajaran berhasil diubah');

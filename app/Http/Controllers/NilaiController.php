@@ -14,7 +14,12 @@ class NilaiController extends Controller
      */
     public function index()
     {
-        //
+        $scores = Nilai::with(['siswa:id,nama', 'mengajar:id,guru_id,mapel_id,kelas_id,', 'mengajar.guru:id,nama', 'mengajar.mapel:id,nama', 'mengajar.kelas:id,nama'])->get();
+        dd($scores);
+        if ($scores->count() <= 0){
+            Nilai::GeneralMessage('warning', 'Tabel nilai masih kosong');
+        }
+        return view('nilai.index', compact('scores'));
     }
 
     /**

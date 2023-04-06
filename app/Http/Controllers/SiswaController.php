@@ -10,7 +10,7 @@ class SiswaController extends Controller
 {
     public function index()
     {
-        $students = Siswa::with('kelas.jurusan:id,nama')->get();
+        $students = Siswa::with(['kelas:id,nama,jurusan_id', 'kelas.jurusan:id,nama'])->get();
         if($students->count() <= 0){
             Siswa::GeneralMessage('warning', 'Tabel siswa masih kosong');
         }
@@ -66,8 +66,7 @@ class SiswaController extends Controller
         ]);
         $updatedStudent['alamat'] = str_replace("\r", "", $updatedStudent['alamat']);
         if(['nama' => $siswa['nama'], 'jk' => $siswa['jk'], 'alamat' => $siswa['alamat'], 'kelas_id' => $siswa['kelas_id'], 'password' => $siswa['password']] == $updatedStudent){
-            Siswa::GeneralMessage('warning', 'Tidak ada perubahan data');
-            return back();
+            return back()->with('warning', 'Tidak ada perubahan data');
         }
         $updatedStudent['nis'] = $siswa->nis;
         $siswa->update($updatedStudent);

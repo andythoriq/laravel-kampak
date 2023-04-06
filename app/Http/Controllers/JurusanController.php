@@ -81,8 +81,7 @@ class JurusanController extends Controller
             'nama' => ['required', 'regex:/^[A-Z][a-z]+((\s[A-Z][a-z]+)*)$/u', 'max:191', "unique:tb_jurusan,nama,{$jurusan->id},id"]
         ]);
         if(['nama' => $jurusan['nama']] == $updatedMajor){
-            Jurusan::GeneralMessage('warning', 'Tidak ada perubahan data');
-            return back();
+            return back()->with('warning', 'Tidak ada perubahan data');
         }
         $jurusan->update($updatedMajor);
         return redirect(route('jurusan.index'))->with('success', 'Data jurusan berhasil diubah');

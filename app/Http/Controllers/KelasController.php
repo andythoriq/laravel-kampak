@@ -90,8 +90,7 @@ class KelasController extends Controller
             'jurusan_id' => ['required', "in:$majorIds"],
         ]);
         if(["nama" => $kela["nama"],"jurusan_id" => $kela["jurusan_id"]] == $updatedClass){
-            Kelas::GeneralMessage('warning', 'Tidak ada perubahan data');
-            return back();
+            return back()->with('warning', 'Tidak ada perubahan data');
         }
         $kela->update($updatedClass);
         return redirect(route('kelas.index'))->with('success', 'Data kelas berhasil diubah');
